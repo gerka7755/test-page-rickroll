@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка безопасности</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .captcha-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { background-color: #45a049; }
+        #video-container {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: black;
+            z-index: 9999;
+        }
+        video { width: 100%; height: 100%; object-fit: cover; }
+    </style>
+</head>
+<body>
+
+    <div class="captcha-box" id="captcha">
+        <h2>Подтвердите, что вы не робот</h2>
+        <p>Для получения доступа к файлу нажмите кнопку ниже:</p>
+        <button onclick="startRickRoll()">Я не робот (Скачать)</button>
+    </div>
+
+    <div id="video-container">
+        <!-- Используем прямую ссылку на видео-файл рикролла -->
+        <video id="rickview" src="https://github.io" preload="auto"></video>
+    </div>
+
+    <script>
+        function startRickRoll() {
+            // Скрываем капчу и показываем видео
+            document.getElementById('captcha').style.display = 'none';
+            const container = document.getElementById('video-container');
+            container.style.display = 'block';
+
+            const video = document.getElementById('rickview');
+            
+            // Запрашиваем полноэкранный режим
+            if (container.requestFullscreen) { container.requestFullscreen(); }
+            else if (container.webkitRequestFullscreen) { container.webkitRequestFullscreen(); }
+
+            // Включаем звук на максимум внутри браузера и запускаем
+            video.volume = 1.0; 
+            video.play();
+        }
+    </script>
+</body>
+</html>
